@@ -27,7 +27,7 @@ const Login = () => {
         </h2>
         <p className="mt-4 mb-16 font-poppins">
           If you don't have an account{" "}
-          <Link to={"/register"} className="font-semibold text-[#ff4f5a]" href="">
+          <Link to={"/signup"} className="font-semibold text-[#ff4f5a]" href="">
             Register
           </Link>
         </p>

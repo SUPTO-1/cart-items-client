@@ -58,7 +58,7 @@ const Navbar = () => {
           <span className="text-[#253b34] text-xs md:text-[24px] md:ml-2 md:font-bold font-poppins">
             /
           </span>
-          <Link to="/register">
+          <Link to="/signup">
             <a className="text-[#253b34] text-xs md:text-[24px] md:ml-2 font-poppins md:font-bold">
               Sign Up
             </a>
