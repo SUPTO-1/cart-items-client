@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import logo from "../assets/images/logo.png";
 import image from "../assets/images/login.jpg";
 import { MdPhotoCamera } from "react-icons/md";
-import { useContext } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Providers/AuthProvider";
+import { useContext } from "react";
 const SignUp = () => {
     const {createUser} = useContext(AuthContext);
   const handleRegister = (e) => {

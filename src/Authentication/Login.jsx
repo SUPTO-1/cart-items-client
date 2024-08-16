@@ -2,8 +2,66 @@ import { CiLock } from "react-icons/ci";
 import logo from "../assets/images/logo.png";
 import image from "../assets/images/login.jpg";
 import { Link } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
+import { FaFacebook, FaGithub, FaTwitter } from "react-icons/fa";
+import Swal from "sweetalert2";
+import { GoogleAuthProvider } from "firebase/auth";
+import { useContext } from "react";
+import { AuthContext } from "../Providers/AuthProvider";
 
 const Login = () => {
+    const { logIn, googleSignIn} = useContext(AuthContext);
+  const googleProvider = new GoogleAuthProvider();
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = new FormData(e.target);
+    const email = form.get("email");
+    const password = form.get("password");
+    console.log(email, password);
+    logIn(email, password)
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        Swal.fire({
+          title: "success!",
+          text: "User logged in successfully",
+          icon: "success",
+          confirmButtonText: "Okay",
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        Swal.fire({
+          title: "error!",
+          text: "Password and E-mail doesn't Match",
+          icon: "error",
+          confirmButtonText: "Okay",
+        });
+      });
+  };
+  const handleGoogle = () => {
+    googleSignIn(googleProvider)
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        Swal.fire({
+          title: "success!",
+          text: "User logged in successfully",
+          icon: "success",
+          confirmButtonText: "Okay",
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        Swal.fire({
+          title: "error!",
+          text: "Something went wrong!Try Again.",
+          icon: "error",
+          confirmButtonText: "Okay",
+        });
+      });
+  };
+
   return (
     <div className=" p-2 lg:p-10 xl:p-0 xl:w-3/4 mx-auto mt-10 lg:mt-32 lg:flex lg:gap-32 xl:gap-64">
       <div className="hidden md:block">
@@ -31,7 +89,8 @@ const Login = () => {
             Register
           </Link>
         </p>
-        <div className="mb-5">
+       <form onSubmit={handleLogin}>
+       <div className="mb-5">
           <h2 className="text-left mb-2 text-[#072d76] font-semibold font-poppins">
             Email
           </h2>
@@ -49,6 +108,7 @@ const Login = () => {
               type="text"
               className="grow focus:outline-none input-bordered "
               placeholder="Phone or Email"
+              name="email"
             />
           </div>
         </div>
@@ -73,6 +133,7 @@ const Login = () => {
               type="password"
               className="grow focus:outline-none input-bordered "
               placeholder="Password"
+              name="password"
             />
           </div>
         </label>
@@ -81,6 +142,19 @@ const Login = () => {
             Log In
           </button>
         </div>
+       </form>
+       <div className="w-full">
+       <div className="flex gap-5 mt-5">
+            <button onClick={handleGoogle}>
+              <FcGoogle className="text-3xl"></FcGoogle>
+            </button>
+            <button disabled>
+              <FaGithub className=" text-3xl"></FaGithub>
+            </button>
+            <FaFacebook className="text-[#0866ff] text-3xl"></FaFacebook>
+            <FaTwitter className=" text-[#1da1f2] text-3xl"></FaTwitter>
+          </div>
+       </div>
       </div>
     </div>
   );

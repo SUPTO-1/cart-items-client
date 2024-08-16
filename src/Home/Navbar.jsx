@@ -1,6 +1,44 @@
+import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../Providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+    const { user, logOut, loading } = useContext(AuthContext);
+  const [displayName, setDisplayName] = useState("");
+  const [photoURL, setPhotoURL] = useState("");
+  useEffect(() => {
+    if (user) {
+      setDisplayName(user.displayName);
+      setPhotoURL(user.photoURL);
+    } else {
+      setDisplayName("");
+      setPhotoURL("");
+    }
+  }, [user]);
+  if (loading) {
+    return <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-purple-800 text-center flex justify-center items-center mx-auto mt-24"></div>;
+  }
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        Swal.fire({
+          title: "success!",
+          text: "User logged in successfully",
+          icon: "success",
+          confirmButtonText: "Okay",
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        Swal.fire({
+          title: "error!",
+          text: "Something went wrong!Try Again.",
+          icon: "error",
+          confirmButtonText: "Okay",
+        });
+      });
+  };
     const links = (
         <>
           <li className="font-poppins ">
@@ -50,19 +88,39 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
         <div className="navbar-end">
-          <Link to="/login">
-            <a className="text-[#253b34] text-xs md:text-[24px] md:font-bold font-poppins">
-              Login
-            </a>
-          </Link>
-          <span className="text-[#253b34] text-xs md:text-[24px] md:ml-2 md:font-bold font-poppins">
-            /
-          </span>
-          <Link to="/signup">
-            <a className="text-[#253b34] text-xs md:text-[24px] md:ml-2 font-poppins md:font-bold">
-              Sign Up
-            </a>
-          </Link>
+        {!user ? (
+            <div className="flex navbar-end">
+              <Link to="/login">
+                <a className="btn  text-xs md:text-xl border-none shadow-xl">
+                  Login
+                </a>
+              </Link>
+              <Link to="/signup">
+                <a className="btn  text-xs md:text-xl md:ml-4 border-none shadow-xl">
+                  Register
+                </a>
+              </Link>
+            </div>
+          ) : (
+            <div className="flex">
+              <div className="navbar-end">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle avatar tooltip tooltip-bottom"
+                  data-tip={displayName}
+                >
+                  <div className="w-10 rounded-full">
+                    <img alt="" src={photoURL} />
+                  </div>
+                </div>
+              </div>
+              <Link onClick={handleLogOut}>
+                <a className="btn md:w-[100px]">Logout</a>
+              </Link>
+            </div>
+          )}
+
         </div>
       <div className="ml-2 md:ml-6">
         <label className="swap swap-rotate">
