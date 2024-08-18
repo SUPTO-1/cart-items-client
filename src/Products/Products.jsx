@@ -15,7 +15,7 @@ const Products = () => {
 
   useEffect(() => {
     fetch(
-      `http://localhost:5000/products?brand_name=${filterBrand}&category_name=${filterCategory}&sorting=${sorting}&price=${PriceRange}&page=${currentPage}&limit=10&search=${searchResults}`
+      `https://cart-items-server.vercel.app/products?brand_name=${filterBrand}&category_name=${filterCategory}&sorting=${sorting}&price=${PriceRange}&page=${currentPage}&limit=10&search=${searchResults}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -56,8 +56,10 @@ const Products = () => {
 
   return (
     <div>
-      <div className="flex items-center justify-center mb-10 space-x-4 bg-white text-center rounded-lg shadow-md">
-        <div className="relative flex-grow max-w-xs">
+      <div className="bg-white text-center rounded-lg shadow-md p-4">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-center md:space-x-4">
+        {/* Search Bar */}
+        <div className="relative flex-grow max-w-xs mb-4 md:mb-0">
           <input
             onChange={handleSearch}
             type="text"
@@ -68,64 +70,72 @@ const Products = () => {
             <IoSearch className="text-lg" />
           </div>
         </div>
-        <div>
-          <select
-            onChange={handleBrandName}
-            className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-          >
-            <option value="">Select Brand</option>
-            <option>Apple</option>
-            <option>Google</option>
-            <option>Samsung</option>
-            <option>Xiaomi</option>
-            <option>Sony</option>
-            <option>Huawei</option>
-            <option>LG</option>
-            <option>OnePlus</option>
-            <option>Oppo</option>
-            <option>Realme</option>
-            <option>Nokia</option>
-          </select>
-        </div>
-        <div>
-          <select
-            onChange={handleCategory}
-            className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-          >
-            <option value="">Select Category</option>
-            <option>Smartphone</option>
-            <option>Button Phone</option>
-            <option>Tablet</option>
-          </select>
-        </div>
-        <div>
-          <select
-            onChange={handlePriceRange}
-            className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-          >
-            <option value="">Select Price Range</option>
-            <option>0-100</option>
-            <option>101-300</option>
-            <option>301-500</option>
-            <option>501-700</option>
-            <option>701-900</option>
-            <option>901-1100</option>
-            <option>1101-1300</option>
-            <option>1301-1500</option>
-          </select>
-        </div>
-        <div>
-          <select
-            onChange={handleSorting}
-            className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-          >
-            <option value="">Select Sorting</option>
-            <option>Price: Low to High</option>
-            <option>Price: High to Low</option>
-            <option>Latest</option>
-          </select>
+
+        {/* Select Elements */}
+        <div className="flex flex-col gap-4 md:flex-row md:space-x-4">
+          <div className="flex-grow">
+            <select
+              onChange={handleBrandName}
+              className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+            >
+              <option value="">Select Brand</option>
+              <option>Apple</option>
+              <option>Google</option>
+              <option>Samsung</option>
+              <option>Xiaomi</option>
+              <option>Sony</option>
+              <option>Huawei</option>
+              <option>LG</option>
+              <option>OnePlus</option>
+              <option>Oppo</option>
+              <option>Realme</option>
+              <option>Nokia</option>
+            </select>
+          </div>
+
+          <div className="flex-grow">
+            <select
+              onChange={handleCategory}
+              className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+            >
+              <option value="">Select Category</option>
+              <option>Smartphone</option>
+              <option>Button Phone</option>
+              <option>Tablet</option>
+            </select>
+          </div>
+
+          <div className="flex-grow">
+            <select
+              onChange={handlePriceRange}
+              className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+            >
+              <option value="">Select Price Range</option>
+              <option>0-100</option>
+              <option>101-300</option>
+              <option>301-500</option>
+              <option>501-700</option>
+              <option>701-900</option>
+              <option>901-1100</option>
+              <option>1101-1300</option>
+              <option>1301-1500</option>
+            </select>
+          </div>
+
+          <div className="flex-grow">
+            <select
+              onChange={handleSorting}
+              className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+            >
+              <option value="">Select Sorting</option>
+              <option>Price: Low to High</option>
+              <option>Price: High to Low</option>
+              <option>Latest</option>
+            </select>
+          </div>
         </div>
       </div>
+    </div>
       <div className="grid grid-cols-1 md:grid-cols-2 p-10 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {allProduct.map((product) => (
           <Product key={product._id} product={product}></Product>

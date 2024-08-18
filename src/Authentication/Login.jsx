@@ -1,7 +1,7 @@
 import { CiLock } from "react-icons/ci";
 import logo from "../assets/images/logo.png";
 import image from "../assets/images/login.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook, FaGithub, FaTwitter } from "react-icons/fa";
 import Swal from "sweetalert2";
@@ -12,6 +12,7 @@ import { AuthContext } from "../Providers/AuthProvider";
 const Login = () => {
     const { logIn, googleSignIn} = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
+  const navigate = useNavigate();
   const handleLogin = (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
@@ -28,6 +29,7 @@ const Login = () => {
           icon: "success",
           confirmButtonText: "Okay",
         });
+        navigate(location?.state ? location.state: "/");
       })
       .catch((error) => {
         console.log(error);
@@ -50,6 +52,7 @@ const Login = () => {
           icon: "success",
           confirmButtonText: "Okay",
         });
+        navigate(location?.state ? location.state: "/");
       })
       .catch((error) => {
         console.log(error);

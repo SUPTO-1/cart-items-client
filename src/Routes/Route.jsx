@@ -3,14 +3,17 @@ import Home from "../Home/Home";
 import Root from "../Root/Root";
 import Login from "../Authentication/Login";
 import SignUp from "../Authentication/SignUp";
+import PrivateRoute from "../Providers/PrivateProvider";
+import Error from "../Error/Error";
 const routes = createBrowserRouter([
     {
         path: "/",
         element:<Root></Root>,
+        errorElement:<Error></Error>,
         children:[
             {
                 path: "/",
-                element: <Home></Home>
+                element: <PrivateRoute><Home></Home></PrivateRoute>
             },
             {
                 path: "/login",

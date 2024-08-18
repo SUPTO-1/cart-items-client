@@ -1,5 +1,5 @@
 import { CiLock } from "react-icons/ci";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/images/logo.png";
 import image from "../assets/images/login.jpg";
 import { MdPhotoCamera } from "react-icons/md";
@@ -8,6 +8,7 @@ import { AuthContext } from "../Providers/AuthProvider";
 import { useContext } from "react";
 const SignUp = () => {
     const {createUser} = useContext(AuthContext);
+    const navigate = useNavigate();
   const handleRegister = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -58,6 +59,7 @@ const SignUp = () => {
           icon: "success",
           confirmButtonText: "Okay",
         });
+        navigate(location?.state ? location.state: "/");
       })
       .catch(error => {
         console.log(error);
