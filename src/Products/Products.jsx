@@ -93,16 +93,16 @@ const Products = () => {
                 </select>
             </div>
             <div>
-                <select className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                <select onChange={handlePriceRange} className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
                     <option value="">Select Price Range</option>
-                    <option value="range1">0-100</option>
-                    <option value="range2">101-300</option>
-                    <option value="range3">301-500</option>
-                    <option value="range4">501-700</option>
-                    <option value="range5">701-900</option>
-                    <option value="range6">901-1100</option>
-                    <option value="range7">1101-1300</option>
-                    <option value="range8">1301-1500</option>
+                    <option>0-100</option>
+                    <option>101-300</option>
+                    <option>301-500</option>
+                    <option>501-700</option>
+                    <option>701-900</option>
+                    <option>901-1100</option>
+                    <option>1101-1300</option>
+                    <option>1301-1500</option>
                 </select>
             </div>
             <div>
