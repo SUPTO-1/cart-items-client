@@ -24,7 +24,7 @@ const Products = () => {
       });
   }, [filterBrand, filterCategory, PriceRange, currentPage, sorting]);
 
-  const handlebrandName = (e) => {
+  const handleBrandName = (e) => {
     setFilterBrand(e.target.value);
     setCurrentPage(1);
   };
@@ -32,11 +32,11 @@ const Products = () => {
     setFilterCategory(e.target.value);
     setCurrentPage(1);
   };
-  const handlepricerange = (e) => {
+  const handlePriceRange = (e) => {
     setPriceRange(e.target.value);
     setCurrentPage(1);
   };
-  const handlesroting = (e) => {
+  const handleSroting = (e) => {
     setSorting(e.target.value);
     setCurrentPage(1);
   };
@@ -69,27 +69,27 @@ const Products = () => {
                 </div>
             </div>
             <div>
-                <select className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                <select onChange={handleBrandName} className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
                     <option value="">Select Brand</option>
-                    <option value="brand1">Apple</option>
-                    <option value="brand2">Google</option>
-                    <option value="brand3">Samsung</option>
-                    <option value="brand4">Xiaomi</option>
-                    <option value="brand5">Sony</option>
-                    <option value="brand6">Huawei</option>
-                    <option value="brand7">LG</option>
-                    <option value="brand8">OnePlus</option>
-                    <option value="brand9">Oppo</option>
-                    <option value="brand10">Realme</option>
-                    <option value="brand11">Nokia</option>
+                    <option>Apple</option>
+                    <option>Google</option>
+                    <option>Samsung</option>
+                    <option>Xiaomi</option>
+                    <option>Sony</option>
+                    <option>Huawei</option>
+                    <option>LG</option>
+                    <option>OnePlus</option>
+                    <option>Oppo</option>
+                    <option>Realme</option>
+                    <option>Nokia</option>
                 </select>
             </div>
             <div>
-                <select className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                <select onChange={handleCategory} className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
                     <option value="">Select Category</option>
-                    <option value="category1">Smartphone</option>
-                    <option value="category2">Button Phone</option>
-                    <option value="category3">Tablet</option>
+                    <option >Smartphone</option>
+                    <option>Button Phone</option>
+                    <option>Tablet</option>
                 </select>
             </div>
             <div>
