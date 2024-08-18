@@ -71,25 +71,38 @@ const Products = () => {
             <div>
                 <select className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
                     <option value="">Select Brand</option>
-                    <option value="brand1">Brand 1</option>
-                    <option value="brand2">Brand 2</option>
-                    <option value="brand3">Brand 3</option>
+                    <option value="brand1">Apple</option>
+                    <option value="brand2">Google</option>
+                    <option value="brand3">Samsung</option>
+                    <option value="brand4">Xiaomi</option>
+                    <option value="brand5">Sony</option>
+                    <option value="brand6">Huawei</option>
+                    <option value="brand7">LG</option>
+                    <option value="brand8">OnePlus</option>
+                    <option value="brand9">Oppo</option>
+                    <option value="brand10">Realme</option>
+                    <option value="brand11">Nokia</option>
                 </select>
             </div>
             <div>
                 <select className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
                     <option value="">Select Category</option>
-                    <option value="category1">Category 1</option>
-                    <option value="category2">Category 2</option>
-                    <option value="category3">Category 3</option>
+                    <option value="category1">Smartphone</option>
+                    <option value="category2">Button Phone</option>
+                    <option value="category3">Tablet</option>
                 </select>
             </div>
             <div>
                 <select className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
                     <option value="">Select Price Range</option>
-                    <option value="range1">Price Range 1</option>
-                    <option value="range2">Price Range 2</option>
-                    <option value="range3">Price Range 3</option>
+                    <option value="range1">0-100</option>
+                    <option value="range2">101-300</option>
+                    <option value="range3">301-500</option>
+                    <option value="range4">501-700</option>
+                    <option value="range5">701-900</option>
+                    <option value="range6">901-1100</option>
+                    <option value="range7">1101-1300</option>
+                    <option value="range8">1301-1500</option>
                 </select>
             </div>
             <div>
@@ -97,7 +110,7 @@ const Products = () => {
                     <option value="">Select Sorting</option>
                     <option value="asc">Price: Low to High</option>
                     <option value="desc">Price: High to Low</option>
-                    <option value="popular">Most Popular</option>
+                    <option value="popular">Latest</option>
                 </select>
             </div>
         </div>

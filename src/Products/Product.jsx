@@ -15,12 +15,22 @@ const Product = ({ product }) => {
                 />
             </figure>
             <div className="p-4">
+                {/* Brand Name */}
+                <h3 className="text-sm font-semibold text-gray-600 mb-1">
+                    {product.brand_name}
+                </h3>
+                
+                {/* Product Name */}
                 <h2 className="text-xl font-bold text-gray-800 mb-2 hover:text-red-500 transition-colors duration-300">
                     {product.product_name}
                 </h2>
+                
+                {/* Description */}
                 <p className="text-gray-600 mb-3 text-sm">
                     {product.description}
                 </p>
+                
+                {/* Price and Category */}
                 <div className="flex justify-between items-center mb-3">
                     <span className="text-xl font-bold text-green-500">
                         ${product.price.toFixed(2)}
@@ -29,6 +39,8 @@ const Product = ({ product }) => {
                         {product.category_name}
                     </div>
                 </div>
+                
+                {/* Rating and Creation Date */}
                 <div className="flex justify-between items-center mb-3">
                     <div className="flex items-center">
                         {[...Array(5)].map((_, index) => (
@@ -46,6 +58,8 @@ const Product = ({ product }) => {
                         {new Date(product.creation_date).toLocaleDateString()}
                     </p>
                 </div>
+                
+                {/* Add to Cart Button */}
                 <div className="flex justify-between items-center">
                     <button className="btn bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-semibold py-2 px-4 rounded-full hover:from-purple-600 hover:to-indigo-600 transition-colors duration-300 text-sm">
                         <IoCartOutline className="text-lg mr-2" />
