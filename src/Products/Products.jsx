@@ -11,10 +11,11 @@ const Products = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalProducts, setTotalProducts] = useState(0);
+  const [searchResults, setSearchResults] = useState("");
 
   useEffect(() => {
     fetch(
-      `http://localhost:5000/products?brand_name=${filterBrand}&category_name=${filterCategory}&sorting=${sorting}&price=${PriceRange}&page=${currentPage}&limit=10`
+      `http://localhost:5000/products?brand_name=${filterBrand}&category_name=${filterCategory}&sorting=${sorting}&price=${PriceRange}&page=${currentPage}&limit=10&search=${searchResults}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -22,7 +23,7 @@ const Products = () => {
         setTotalProducts(data.totalProducts);
         setTotalPages(data.totalPages);
       });
-  }, [filterBrand, filterCategory, PriceRange, currentPage, sorting]);
+  }, [filterBrand, filterCategory, PriceRange, currentPage, sorting , searchResults]);
 
   const handleBrandName = (e) => {
     setFilterBrand(e.target.value);
@@ -36,18 +37,16 @@ const Products = () => {
     setPriceRange(e.target.value);
     setCurrentPage(1);
   };
-  const handleSroting = (e) => {
+  const handleSorting = (e) => {
     setSorting(e.target.value);
     setCurrentPage(1);
   };
 
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const filteredProduct = allProduct.filter((product) => {
-    return (product.Product_Name?.toLowerCase() || "").includes(
-      searchQuery.toLowerCase()
-    );
-  });
+  const handleSearch = (e) => {
+    //e.preventDefault();
+    setSearchResults(e.target.value);
+    //console.log(e.value);
+  }
 
   const handlePageChange = (newPage) => {
     if (newPage > 0 && newPage <= totalPages) {
@@ -58,64 +57,77 @@ const Products = () => {
   return (
     <div>
       <div className="flex items-center justify-center mb-10 space-x-4 bg-white text-center rounded-lg shadow-md">
-            <div className="relative flex-grow max-w-xs">
-                <input
-                    type="text"
-                    placeholder="Search..."
-                    className="w-full p-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                />
-                <div className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-500">
-                    <IoSearch className="text-lg" />
-                </div>
-            </div>
-            <div>
-                <select onChange={handleBrandName} className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
-                    <option value="">Select Brand</option>
-                    <option>Apple</option>
-                    <option>Google</option>
-                    <option>Samsung</option>
-                    <option>Xiaomi</option>
-                    <option>Sony</option>
-                    <option>Huawei</option>
-                    <option>LG</option>
-                    <option>OnePlus</option>
-                    <option>Oppo</option>
-                    <option>Realme</option>
-                    <option>Nokia</option>
-                </select>
-            </div>
-            <div>
-                <select onChange={handleCategory} className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
-                    <option value="">Select Category</option>
-                    <option >Smartphone</option>
-                    <option>Button Phone</option>
-                    <option>Tablet</option>
-                </select>
-            </div>
-            <div>
-                <select onChange={handlePriceRange} className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
-                    <option value="">Select Price Range</option>
-                    <option>0-100</option>
-                    <option>101-300</option>
-                    <option>301-500</option>
-                    <option>501-700</option>
-                    <option>701-900</option>
-                    <option>901-1100</option>
-                    <option>1101-1300</option>
-                    <option>1301-1500</option>
-                </select>
-            </div>
-            <div>
-                <select className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
-                    <option value="">Select Sorting</option>
-                    <option value="asc">Price: Low to High</option>
-                    <option value="desc">Price: High to Low</option>
-                    <option value="popular">Latest</option>
-                </select>
-            </div>
+        <div className="relative flex-grow max-w-xs">
+          <input
+            onChange={handleSearch}
+            type="text"
+            placeholder="Search..."
+            className="w-full p-2 pl-10 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+          />
+          <div className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-500">
+            <IoSearch className="text-lg" />
+          </div>
         </div>
+        <div>
+          <select
+            onChange={handleBrandName}
+            className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+          >
+            <option value="">Select Brand</option>
+            <option>Apple</option>
+            <option>Google</option>
+            <option>Samsung</option>
+            <option>Xiaomi</option>
+            <option>Sony</option>
+            <option>Huawei</option>
+            <option>LG</option>
+            <option>OnePlus</option>
+            <option>Oppo</option>
+            <option>Realme</option>
+            <option>Nokia</option>
+          </select>
+        </div>
+        <div>
+          <select
+            onChange={handleCategory}
+            className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+          >
+            <option value="">Select Category</option>
+            <option>Smartphone</option>
+            <option>Button Phone</option>
+            <option>Tablet</option>
+          </select>
+        </div>
+        <div>
+          <select
+            onChange={handlePriceRange}
+            className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+          >
+            <option value="">Select Price Range</option>
+            <option>0-100</option>
+            <option>101-300</option>
+            <option>301-500</option>
+            <option>501-700</option>
+            <option>701-900</option>
+            <option>901-1100</option>
+            <option>1101-1300</option>
+            <option>1301-1500</option>
+          </select>
+        </div>
+        <div>
+          <select
+            onChange={handleSorting}
+            className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+          >
+            <option value="">Select Sorting</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+            <option>Latest</option>
+          </select>
+        </div>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 p-10 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {filteredProduct.map((product) => (
+        {allProduct.map((product) => (
           <Product key={product._id} product={product}></Product>
         ))}
       </div>
